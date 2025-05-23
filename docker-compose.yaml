@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: brain-agriculture
+      POSTGRES_PASSWORD: agriculture2025
+      POSTGRES_DB: BRAIN_AGRICULTURE
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  redis_data:
+    driver: local
+  pgdata:
+    driver: local

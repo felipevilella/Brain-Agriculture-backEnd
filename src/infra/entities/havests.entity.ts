@@ -19,8 +19,8 @@ export class Harvests {
   year: number;
 
   @CreateDateColumn()
-  createdDate: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date;
+  updatedAt: Date;
 }

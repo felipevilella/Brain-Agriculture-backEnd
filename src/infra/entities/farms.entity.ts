@@ -46,8 +46,8 @@ export class Farms {
   producers: Producers;
 
   @CreateDateColumn()
-  createdDate: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date;
+  updatedAt: Date;
 }

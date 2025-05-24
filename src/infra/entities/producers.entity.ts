@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -22,7 +23,7 @@ export class Producers {
     enum: STATES_TYPE,
     nullable: false,
   })
-  state: STATES_TYPE;
+  states: STATES_TYPE;
 
   @Column({ nullable: false, unique: true })
   document: string;
@@ -34,8 +35,11 @@ export class Producers {
   name: string;
 
   @CreateDateColumn()
-  createdDate: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date;
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

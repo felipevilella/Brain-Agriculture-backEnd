@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Inject,
   Param,
   Post,
@@ -9,18 +11,23 @@ import {
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
+import { ProducerUseCaseProxyModule } from "src/infra/usecase-proxy/producer-usecase-proxy.module";
 import { UseCaseProxy } from "src/infra/usecase-proxy/usecase-proxy";
-import { UseCaseProxyModule } from "src/infra/usecase-proxy/usecase-proxy.module";
-
 
 import { CreateProducerDto, UpdateProducerDto } from "./dto/producers.dto";
 import { CreateOrUpdateProducerService } from "./services/createOrUpdateProducer.services";
+import { DeleteProducerService } from "./services/deleteProducer.service";
+import { ListProducerService } from "./services/ListProducers.service";
 
 @Controller("producer")
 export class ProducerController {
   constructor(
-    @Inject(UseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER)
-    private readonly createProducerService: UseCaseProxy<CreateOrUpdateProducerService>
+    @Inject(ProducerUseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER)
+    private readonly createProducerService: UseCaseProxy<CreateOrUpdateProducerService>,
+    @Inject(ProducerUseCaseProxyModule.DELETE_PRODUCER)
+    private readonly deleteProducerService: UseCaseProxy<DeleteProducerService>,
+    @Inject(ProducerUseCaseProxyModule.LIST_PRODUCER)
+    private readonly listProducerService: UseCaseProxy<ListProducerService>
   ) {}
 
   @Post()
@@ -31,10 +38,20 @@ export class ProducerController {
 
   @Put(":id")
   @UsePipes(new ValidationPipe({ transform: true }))
-  async update(
-    @Param("id") id: string,
-    @Body() producer: UpdateProducerDto
-  ) {
+  async update(@Param("id") id: string, @Body() producer: UpdateProducerDto) {
     return await this.createProducerService.getInstance().execute(producer, id);
+  }
+
+  @Delete(":id")
+  @HttpCode(204)
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async delete(@Param("id") id: string) {
+    return await this.deleteProducerService.getInstance().execute(id);
+  }
+
+  @Get("/list")
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async list() {
+    return await this.listProducerService.getInstance().execute();
   }
 }

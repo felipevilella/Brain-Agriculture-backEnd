@@ -7,5 +7,6 @@ export interface IProducersRepository {
   getProducerById: (id:string) => Promise<IProducerDto>
   updateProducer:(producerId: string, data: CreateProducerDto) => Promise<void>
   deleteProducer:(producerId: string) => Promise<void>
+  listProducers:() => Promise<IProducerDto[]>
 }
 

@@ -1,12 +1,12 @@
 import { BadRequestException } from "@nestjs/common";
+import { TYPE_DOCUMENT } from "src/infra/definitions/producers.type";
 import { ProducersRepository } from "src/infra/repositories/producers.repository";
+
 import {
   CreateProducerDto,
-  IProducerDto,
   IProducerMapper,
   UpdateProducerDto,
 } from "../dto/producers.dto";
-import { TYPE_DOCUMENT } from "src/infra/definitions/producers.type";
 import { ProducerMapper } from "../mapper/producers.mapper";
 
 export class CreateOrUpdateProducerService {
@@ -60,8 +60,6 @@ export class CreateOrUpdateProducerService {
     producer: CreateProducerDto | UpdateProducerDto,
     id?: string
   ): Promise<IProducerMapper> {
-    console.log("aqui");
-    console.log(id);
     const result = id
       ? await this.updateProducer(id, producer)
       : await this.createProducer(producer);

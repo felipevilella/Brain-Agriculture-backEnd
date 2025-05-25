@@ -4,11 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 
-import { STATES_TYPE } from "../definitions/localizations.type";
+import { Harvests } from "./havests.entity";
 import { Producers } from "./producers.entity";
 
 @Entity("farms")
@@ -16,34 +17,37 @@ export class Farms {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ nullable: false })
-  producerId: string;
-
-  @Column({ nullable: false })
+  @Column()
   name: string;
 
-  @Column({ nullable: false })
+  @Column()
+  producerId: string;
+
+  @Column()
   city: string;
 
-  @Column({
-    type: "enum",
-    enum: STATES_TYPE,
-    nullable: false,
-  })
-  state: STATES_TYPE;
+  @Column()
+  states: string;
 
-  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  @Column("float")
   totalArea: number;
 
-  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  @Column("float")
   arableArea: number;
 
-  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  @Column("float")
   vegetationArea: number;
 
-  @ManyToOne(() => Producers, { onDelete: "CASCADE" })
+  @ManyToOne(() => Producers, (producer) => producer.farms)
   @JoinColumn({ name: "producerId" })
-  producers: Producers;
+  producer: Producers;
+
+  
+  @OneToMany(() => Harvests, (harvest) => harvest.farm, {
+    eager: true,
+    cascade: true,
+  })
+  harvests: Harvests[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -3,12 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 
 import { STATES_TYPE } from "../definitions/localizations.type";
 import { TYPE_DOCUMENT } from "../definitions/producers.type";
+import { Farms } from "./farms.entity";
 
 @Entity("producers")
 export class Producers {
@@ -42,4 +44,7 @@ export class Producers {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Farms, (farm) => farm.producer, { cascade: true })
+  farms: Farms[];
 }

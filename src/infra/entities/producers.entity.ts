@@ -1,13 +1,16 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 
 import { STATES_TYPE } from "../definitions/localizations.type";
 import { TYPE_DOCUMENT } from "../definitions/producers.type";
+import { Farms } from "./farms.entity";
 
 @Entity("producers")
 export class Producers {
@@ -22,7 +25,7 @@ export class Producers {
     enum: STATES_TYPE,
     nullable: false,
   })
-  state: STATES_TYPE;
+  states: STATES_TYPE;
 
   @Column({ nullable: false, unique: true })
   document: string;
@@ -34,8 +37,14 @@ export class Producers {
   name: string;
 
   @CreateDateColumn()
-  createdDate: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedDate: Date;
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @OneToMany(() => Farms, (farm) => farm.producer, { cascade: true })
+  farms: Farms[];
 }

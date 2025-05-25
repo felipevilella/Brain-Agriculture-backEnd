@@ -6,13 +6,16 @@ import { Crops } from "../entities/crops.entity";
 import { Farms } from "../entities/farms.entity";
 import { Harvests } from "../entities/havests.entity";
 import { Producers } from "../entities/producers.entity";
+import { FarmsRepository } from "./farms.repository";
+import { ProducersRepository } from "./producers.repository";
+import { CropRepository } from "./crop.repository";
 
 @Module({
   imports: [
     TypeOrmConfigModule,
     TypeOrmModule.forFeature([Producers, Farms, Harvests, Crops]),
   ],
-  providers: [],
-  exports: [],
+  providers: [ProducersRepository, FarmsRepository, CropRepository],
+  exports: [ProducersRepository, FarmsRepository, CropRepository],
 })
 export class RepositoriesModule {}

@@ -1,6 +1,5 @@
+import { IProducerMapper } from "src/infra/definitions/dtos/producers.dto";
 import { ProducersRepository } from "src/infra/repositories/producers.repository";
-
-import { IProducerMapper } from "../dto/producers.dto";
 import { ProducerMapper } from "../mapper/producers.mapper";
 
 export class ListProducerService {

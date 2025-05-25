@@ -10,7 +10,7 @@ import { UseCaseProxy } from "./usecase-proxy";
   imports: [RepositoriesModule],
 })
 export class FarmUseCaseProxyModule {
-  static CREATE_FARM = "CreateFarmService";
+  static CREATE_FARM_SERVICE = "CreateFarmService";
 
   static register(): DynamicModule {
     return {
@@ -18,7 +18,7 @@ export class FarmUseCaseProxyModule {
       providers: [
         {
           inject: [FarmsRepository, ProducersRepository],
-          provide: FarmUseCaseProxyModule.CREATE_FARM,
+          provide: FarmUseCaseProxyModule.CREATE_FARM_SERVICE,
           useFactory: (farmsRepository: FarmsRepository, producersRepository: ProducersRepository) =>
             new UseCaseProxy(
               new CreateFarmService(farmsRepository, producersRepository),
@@ -26,7 +26,7 @@ export class FarmUseCaseProxyModule {
         },
       ],
       exports: [
-        FarmUseCaseProxyModule.CREATE_FARM
+        FarmUseCaseProxyModule.CREATE_FARM_SERVICE
       ],
     };
   }

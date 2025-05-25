@@ -9,14 +9,14 @@ import {
 import { FarmUseCaseProxyModule } from "src/infra/usecase-proxy/farm-usecase-proxy.module";
 import { UseCaseProxy } from "src/infra/usecase-proxy/usecase-proxy";
 
-import { CreateFarmDto } from "./dto/farms.dto";
 import { CreateFarmService } from "./services/createFarm.services";
+import { CreateFarmDto } from "src/infra/definitions/dtos/farms.dto";
 
 
 @Controller("farm")
 export class FarmController {
   constructor(
-    @Inject(FarmUseCaseProxyModule.CREATE_FARM)
+    @Inject(FarmUseCaseProxyModule.CREATE_FARM_SERVICE)
     private readonly createFarmService: UseCaseProxy<CreateFarmService>,
   ) {}
 

@@ -1,5 +1,6 @@
+import { CreateProducerDto, IProducerDto } from "src/infra/definitions/dtos/producers.dto";
 import { TYPE_DOCUMENT } from "src/infra/definitions/producers.type";
-import { CreateProducerDto, IProducerDto } from "src/module/producers/dto/producers.dto";
+
 
 export interface IProducersRepository {
   createProducer: (producer: CreateProducerDto) => Promise<IProducerDto>;

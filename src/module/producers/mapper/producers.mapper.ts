@@ -1,7 +1,8 @@
 import { instanceToInstance } from "class-transformer";
+import { IProducerDto, IProducerMapper } from "src/infra/definitions/dtos/producers.dto";
 import { FarmMapper } from "src/module/farms/mapper/farms.mapper";
 
-import { IProducerDto,IProducerMapper } from "../dto/producers.dto";
+
 class ProducerMapper {
   static toDTO({ city, document, name, type, id, states, farms }: IProducerDto): IProducerMapper {
     return instanceToInstance({

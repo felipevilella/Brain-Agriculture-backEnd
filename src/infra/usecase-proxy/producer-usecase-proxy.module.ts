@@ -11,11 +11,11 @@ import { UseCaseProxy } from "./usecase-proxy";
   imports: [RepositoriesModule],
 })
 export class ProducerUseCaseProxyModule {
-  static CREATE_OR_UPDATE_PRODUCER = "CreateOrUpdateProducerService";
+  static CREATE_OR_UPDATE_PRODUCER_SERVICE = "CreateOrUpdateProducerService";
 
-  static DELETE_PRODUCER = "DeleteProducerService";
+  static DELETE_PRODUCER_SERVICE = "DeleteProducerService";
 
-  static LIST_PRODUCER = "ListProducerService";
+  static LIST_PRODUCER_SERVICE = "ListProducerService";
 
   static register(): DynamicModule {
     return {
@@ -23,7 +23,7 @@ export class ProducerUseCaseProxyModule {
       providers: [
         {
           inject: [ProducersRepository],
-          provide: ProducerUseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER,
+          provide: ProducerUseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER_SERVICE,
           useFactory: (producersRepository: ProducersRepository) =>
             new UseCaseProxy(
               new CreateOrUpdateProducerService(producersRepository),
@@ -31,7 +31,7 @@ export class ProducerUseCaseProxyModule {
         },
         {
           inject: [ProducersRepository],
-          provide: ProducerUseCaseProxyModule.DELETE_PRODUCER,
+          provide: ProducerUseCaseProxyModule.DELETE_PRODUCER_SERVICE,
           useFactory: (producersRepository: ProducersRepository) =>
             new UseCaseProxy(
               new DeleteProducerService(producersRepository),
@@ -39,7 +39,7 @@ export class ProducerUseCaseProxyModule {
         },
         {
           inject: [ProducersRepository],
-          provide: ProducerUseCaseProxyModule.LIST_PRODUCER,
+          provide: ProducerUseCaseProxyModule.LIST_PRODUCER_SERVICE,
           useFactory: (producersRepository: ProducersRepository) =>
             new UseCaseProxy(
               new ListProducerService(producersRepository),
@@ -47,9 +47,9 @@ export class ProducerUseCaseProxyModule {
         },
       ],
       exports: [
-        ProducerUseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER,
-        ProducerUseCaseProxyModule.DELETE_PRODUCER,
-        ProducerUseCaseProxyModule.LIST_PRODUCER,
+        ProducerUseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER_SERVICE,
+        ProducerUseCaseProxyModule.DELETE_PRODUCER_SERVICE,
+        ProducerUseCaseProxyModule.LIST_PRODUCER_SERVICE,
       ],
     };
   }

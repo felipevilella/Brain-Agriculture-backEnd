@@ -12,7 +12,8 @@ import {
 import { cnpj, cpf } from "cpf-cnpj-validator";
 import { STATES_TYPE } from "src/infra/definitions/localizations.type";
 import { TYPE_DOCUMENT } from "src/infra/definitions/producers.type";
-import { IFarmDto } from "src/module/farms/dto/farms.dto";
+import { IFarmDto } from "./farms.dto";
+
 
 @ValidatorConstraint({ name: "IsValidCpfOrCnpj", async: false })
 export class IsValidCpfOrCnpjConstraint

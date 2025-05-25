@@ -3,8 +3,9 @@ import { Decimal } from "decimal.js";
 import { FarmsRepository } from "src/infra/repositories/farms.repository";
 import { ProducersRepository } from "src/infra/repositories/producers.repository";
 
-import { CreateFarmDto, IFarmDto, IFarmMapper } from "../dto/farms.dto";
+
 import { FarmMapper } from "../mapper/farms.mapper";
+import { CreateFarmDto, IFarmDto, IFarmMapper } from "src/infra/definitions/dtos/farms.dto";
 
 export class CreateFarmService {
   constructor(

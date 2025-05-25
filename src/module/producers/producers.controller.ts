@@ -14,19 +14,20 @@ import {
 import { ProducerUseCaseProxyModule } from "src/infra/usecase-proxy/producer-usecase-proxy.module";
 import { UseCaseProxy } from "src/infra/usecase-proxy/usecase-proxy";
 
-import { CreateProducerDto, UpdateProducerDto } from "./dto/producers.dto";
+
 import { CreateOrUpdateProducerService } from "./services/createOrUpdateProducer.services";
 import { DeleteProducerService } from "./services/deleteProducer.service";
 import { ListProducerService } from "./services/ListProducers.service";
+import { CreateProducerDto, UpdateProducerDto } from "src/infra/definitions/dtos/producers.dto";
 
 @Controller("producer")
 export class ProducerController {
   constructor(
-    @Inject(ProducerUseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER)
+    @Inject(ProducerUseCaseProxyModule.CREATE_OR_UPDATE_PRODUCER_SERVICE)
     private readonly createProducerService: UseCaseProxy<CreateOrUpdateProducerService>,
-    @Inject(ProducerUseCaseProxyModule.DELETE_PRODUCER)
+    @Inject(ProducerUseCaseProxyModule.DELETE_PRODUCER_SERVICE)
     private readonly deleteProducerService: UseCaseProxy<DeleteProducerService>,
-    @Inject(ProducerUseCaseProxyModule.LIST_PRODUCER)
+    @Inject(ProducerUseCaseProxyModule.LIST_PRODUCER_SERVICE)
     private readonly listProducerService: UseCaseProxy<ListProducerService>
   ) {}
 

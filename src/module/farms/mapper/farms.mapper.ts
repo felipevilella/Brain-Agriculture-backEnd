@@ -1,6 +1,6 @@
 import { instanceToInstance } from "class-transformer";
+import { ICropDto, IFarmDto, IFarmMapper, IHarvestDto } from "src/infra/definitions/dtos/farms.dto";
 
-import { ICropDto, IFarmDto, IFarmMapper,IHarvestDto } from "../dto/farms.dto";
 
 class FarmMapper {
   static toDTO(farm: IFarmDto): IFarmMapper {

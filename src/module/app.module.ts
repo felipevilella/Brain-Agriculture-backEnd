@@ -8,6 +8,8 @@ import { FarmController } from "./farms/farms.controller";
 import { FarmModule } from "./farms/farms.module";
 import { ProducerController } from "./producers/producers.controller";
 import { ProducerModule } from "./producers/producers.module";
+import { DashboardController } from "./dashboard/dashboard.controller";
+import { DashboardUseCaseProxyModule } from "src/infra/usecase-proxy/dashboard-usecase-proxy.module";
 
 @Module({
   imports: [
@@ -15,12 +17,14 @@ import { ProducerModule } from "./producers/producers.module";
     FarmModule,
     ProducerUseCaseProxyModule.register(),
     FarmUseCaseProxyModule.register(),
+    DashboardUseCaseProxyModule.register(),
     EnvironmentConfigModule,
     TypeOrmConfigModule,
   ],
   controllers: [
     ProducerController,
-    FarmController
+    FarmController,
+    DashboardController
   ],
 })
 export class AppModule {}

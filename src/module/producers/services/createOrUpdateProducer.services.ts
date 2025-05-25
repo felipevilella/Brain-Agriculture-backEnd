@@ -1,12 +1,7 @@
 import { BadRequestException } from "@nestjs/common";
+import { CreateProducerDto, IProducerMapper, UpdateProducerDto } from "src/infra/definitions/dtos/producers.dto";
 import { TYPE_DOCUMENT } from "src/infra/definitions/producers.type";
 import { ProducersRepository } from "src/infra/repositories/producers.repository";
-
-import {
-  CreateProducerDto,
-  IProducerMapper,
-  UpdateProducerDto,
-} from "../dto/producers.dto";
 import { ProducerMapper } from "../mapper/producers.mapper";
 
 export class CreateOrUpdateProducerService {

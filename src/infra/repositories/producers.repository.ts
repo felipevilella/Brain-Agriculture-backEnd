@@ -1,15 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import {
-  CreateProducerDto,
-  IProducerDto,
-  UpdateProducerDto,
-} from "src/module/producers/dto/producers.dto";
+
 import { IProducersRepository } from "src/repositories/producers.repository.interface";
 import { Repository } from "typeorm";
 
 import { TYPE_DOCUMENT } from "../definitions/producers.type";
 import { Producers } from "../entities/producers.entity";
+import { CreateProducerDto, IProducerDto, UpdateProducerDto } from "../definitions/dtos/producers.dto";
 
 @Injectable()
 export class ProducersRepository implements IProducersRepository {

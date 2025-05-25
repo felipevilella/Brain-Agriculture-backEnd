@@ -69,14 +69,13 @@ export class CreateFarmDto {
   @IsNotEmpty()
   @IsNumber()
   vegetationArea: number;
-  
+
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateHarvestDto)
   harvests: CreateHarvestDto[];
 }
-
 
 export interface ICropDto {
   id: string;
@@ -106,6 +105,16 @@ export interface IFarmDto {
   harvests?: IHarvestDto[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ITotalFarmByStateDto {
+  state: string;
+  count: number;
+}
+
+export interface ITotalArableVegetationDto {
+  arableArea: number;
+  vegetationArea: number;
 }
 
 export interface IFarmMapper {

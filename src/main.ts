@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import * as cors from "cors";
 
 import { AppModule } from "./module/app.module";
+import { AllExceptionsFilter } from "./infra/helpers/all-exceptions.filter";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,7 @@ async function bootstrap() {
       allowedHeaders: ["Content-Type", "Authorization"],
     }),
   );
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   await app.listen(3333);
 }

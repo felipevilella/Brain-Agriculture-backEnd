@@ -5,6 +5,7 @@ import {
 } from "src/infra/definitions/dtos/farms.dto";
 import { CropRepository } from "src/infra/repositories/crop.repository";
 import { ITotalCropNameDto } from "src/infra/definitions/dtos/crop.dtos";
+import { logInfoObject } from "src/infra/helpers/logInfo";
 
 export interface IDashboardDto {
   totalFarms: number;
@@ -28,8 +29,10 @@ export class DashboardService {
     const TotalFarmByStates = await this.farmRepository.getTotalFarmByStates();
     const totalArableVegetation =
       await this.farmRepository.getTotalArableVegetation();
+      
 
     const totalCropsName = await this.cropsRepository.getTotalCropByName();
+    logInfoObject('totalCropsName', totalCropsName)
 
     return {
       totalFarms,

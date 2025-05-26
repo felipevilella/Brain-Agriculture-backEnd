@@ -12,7 +12,7 @@ import {
 import { cnpj, cpf } from "cpf-cnpj-validator";
 import { STATES_TYPE } from "src/infra/definitions/localizations.type";
 import { TYPE_DOCUMENT } from "src/infra/definitions/producers.type";
-import { IFarmDto } from "./farms.dto";
+import { IFarmDto, IFarmMapper } from "./farms.dto";
 
 
 @ValidatorConstraint({ name: "IsValidCpfOrCnpj", async: false })
@@ -21,7 +21,6 @@ export class IsValidCpfOrCnpjConstraint
 {
   validate(value: string, args: ValidationArguments): boolean {
     const obj = args.object as any;
-    console.log(value);
 
     if (obj.typeDocument === TYPE_DOCUMENT.CPF) {
       return cpf.isValid(value);
@@ -118,7 +117,7 @@ export class IProducerDto {
   city: string;
   states: STATES_TYPE;
   document: string;
-  type: TYPE_DOCUMENT;
+  typeDocument: TYPE_DOCUMENT;
   farms?: IFarmDto[];
   createdAt: Date;
   updatedAt: Date;
@@ -130,5 +129,6 @@ export class IProducerMapper {
   city: string;
   states: STATES_TYPE;
   document: string;
-  type: TYPE_DOCUMENT;
+  typeDocument: TYPE_DOCUMENT;
+  farms?: IFarmMapper[];
 }

@@ -11,6 +11,7 @@ import { UseCaseProxy } from "src/infra/usecase-proxy/usecase-proxy";
 
 import { CreateFarmService } from "./services/createFarm.services";
 import { CreateFarmDto } from "src/infra/definitions/dtos/farms.dto";
+import { logInfoInput } from "src/infra/helpers/logInfo";
 
 
 @Controller("farm")
@@ -23,6 +24,7 @@ export class FarmController {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() farm: CreateFarmDto) {
+    logInfoInput(farm)
     return await this.createFarmService.getInstance().execute(farm);
   }
 }

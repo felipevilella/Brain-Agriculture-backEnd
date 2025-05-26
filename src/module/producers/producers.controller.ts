@@ -16,12 +16,12 @@ import { UseCaseProxy } from "src/infra/usecase-proxy/usecase-proxy";
 
 import { CreateOrUpdateProducerService } from "./services/createOrUpdateProducer.services";
 import { DeleteProducerService } from "./services/deleteProducer.service";
-import { ListProducerService } from "./services/ListProducers.service";
 import {
   CreateProducerDto,
   UpdateProducerDto,
 } from "src/infra/definitions/dtos/producers.dto";
 import { logInfoInput } from "src/infra/helpers/logInfo";
+import { ListProducerService } from "./services/listProducers.service";
 
 @Controller("producer")
 export class ProducerController {

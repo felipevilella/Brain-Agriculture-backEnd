@@ -37,10 +37,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Build project
-        run: yarn build
+        run: yarn install
 
       - name: Wait for Postgres to be ready
         run: |
@@ -50,4 +47,4 @@ jobs:
           done
 
       - name: Run tests
-        run: yarn test
+        run: yarn test:ci

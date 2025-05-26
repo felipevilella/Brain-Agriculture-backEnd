@@ -26,11 +26,10 @@ jobs:
           --health-retries 5
 
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Use Node.js 18
         uses: actions/setup-node@v3
@@ -38,7 +37,10 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
+
+      - name: Build project
+        run: yarn build
 
       - name: Wait for Postgres to be ready
         run: |
@@ -47,5 +49,5 @@ jobs:
             sleep 1
           done
 
-      - name: Run tests with coverage
-        run: yarn test:ci || (echo "::error ::Test run failed"; exit 1)
+      - name: Run tests
+        run: yarn test

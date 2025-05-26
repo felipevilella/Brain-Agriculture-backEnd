@@ -1,8 +1,13 @@
 import { BadRequestException } from "@nestjs/common";
-import { CreateProducerDto, IProducerMapper, UpdateProducerDto } from "src/infra/definitions/dtos/producers.dto";
+import {
+  CreateProducerDto,
+  IProducerMapper,
+  UpdateProducerDto,
+} from "src/infra/definitions/dtos/producers.dto";
 import { TYPE_DOCUMENT } from "src/infra/definitions/producers.type";
 import { ProducersRepository } from "src/infra/repositories/producers.repository";
 import { ProducerMapper } from "../mapper/producers.mapper";
+import { logErrorObject, logInfoObject } from "src/infra/helpers/logInfo";
 
 export class CreateOrUpdateProducerService {
   constructor(private readonly producersRepository: ProducersRepository) {}
@@ -16,6 +21,8 @@ export class CreateOrUpdateProducerService {
       typeDocument
     );
     if (hasProducer) {
+      logErrorObject("CreateOrUpdateProducerService - hasProducerByDocument", hasProducer);
+
       throw new BadRequestException(
         "The document is already in use. Please use a different one."
       );
@@ -28,6 +35,8 @@ export class CreateOrUpdateProducerService {
     const createdProducer =
       await this.producersRepository.createProducer(producer);
 
+    logInfoObject("CreateOrUpdateProducerService - createProducer", createdProducer);
+
     return createdProducer;
   }
 
@@ -35,6 +44,7 @@ export class CreateOrUpdateProducerService {
     const existingProducer = await this.producersRepository.getProducerById(id);
 
     if (!existingProducer) {
+      logErrorObject("CreateOrUpdateProducerService - updateProducer", existingProducer);
       throw new BadRequestException(`Producer ${id} not found.`);
     }
 
@@ -42,12 +52,16 @@ export class CreateOrUpdateProducerService {
       data.document && data.document !== existingProducer.document;
 
     if (isChangingDocument) {
+      logInfoObject('CreateOrUpdateProducerService -isChangingDocument', {isChangingDocument})
       await this.hasProducerByDocument(data.document, data.typeDocument);
     }
 
     await this.producersRepository.updateProducer(id, data);
 
     const updatedProducer = await this.producersRepository.getProducerById(id);
+
+    logInfoObject('CreateOrUpdateProducerService - updatedProducer', updatedProducer)
+
     return updatedProducer;
   }
 

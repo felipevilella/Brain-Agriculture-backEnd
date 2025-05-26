@@ -6,6 +6,7 @@ import { ProducersRepository } from "src/infra/repositories/producers.repository
 
 import { FarmMapper } from "../mapper/farms.mapper";
 import { CreateFarmDto, IFarmDto, IFarmMapper } from "src/infra/definitions/dtos/farms.dto";
+import { logErrorObject, logInfoObject } from "src/infra/helpers/logInfo";
 
 export class CreateFarmService {
   constructor(
@@ -22,6 +23,11 @@ export class CreateFarmService {
     const usedArea = new Decimal(arableArea).plus(vegetationArea);
 
     if (usedArea.gt(total)) {
+      logErrorObject('CreateFarmService - ErrorValidateFarmAreaUsage', {
+        totalArea,
+        arableArea,
+        vegetationArea
+      })
       throw new BadRequestException(
         "The sum of arable and vegetation areas exceeds the total area."
       );
@@ -34,6 +40,8 @@ export class CreateFarmService {
 
     const createdFarm = await this.farmRepository.createFarm(farm);
 
+    logInfoObject('CreateFarmService - createFarm', {farm})
+
     return createdFarm;
   }
 
@@ -41,6 +49,7 @@ export class CreateFarmService {
     const existingProducer = await this.producersRepository.getProducerById(farm.producerId);
 
     if (!existingProducer) {
+      logErrorObject('CreateFarmService - notExistingProducer', {id: farm.producerId})
       throw new BadRequestException(`Producer ${farm.producerId} not found.`);
     }
 

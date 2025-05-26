@@ -80,8 +80,6 @@ export class CreateFarmDto {
 export interface ICropDto {
   id: string;
   name: CROPY_TYPES;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export interface IHarvestDto {
@@ -89,8 +87,6 @@ export interface IHarvestDto {
   name: string;
   year: number;
   crops?: ICropDto[];
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export interface IFarmDto {

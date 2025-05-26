@@ -1,6 +1,7 @@
 import { IProducerMapper } from "src/infra/definitions/dtos/producers.dto";
 import { ProducersRepository } from "src/infra/repositories/producers.repository";
 import { ProducerMapper } from "../mapper/producers.mapper";
+import { logInfoObject } from "src/infra/helpers/logInfo";
 
 export class ListProducerService {
   constructor(private readonly producersRepository: ProducersRepository) {}
@@ -8,7 +9,7 @@ export class ListProducerService {
   private async listProducers():Promise<IProducerMapper[]> {
     const producers = await this.producersRepository.listProducers();
 
-    console.log(producers)
+    logInfoObject('ListProducerService - producers', producers)
 
     return producers.map((producer) => {
       return ProducerMapper.toDTO(producer)

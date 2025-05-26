@@ -1,4 +1,5 @@
 import { BadRequestException } from "@nestjs/common";
+import { logErrorObject, logInfoObject } from "src/infra/helpers/logInfo";
 import { ProducersRepository } from "src/infra/repositories/producers.repository";
 
 export class DeleteProducerService {
@@ -6,8 +7,10 @@ export class DeleteProducerService {
 
   private async deleteProducer(id: string) {
     const existingProducer = await this.producersRepository.getProducerById(id);
+    logInfoObject('DeleteProducerService', existingProducer)
 
     if (!existingProducer) {
+      logErrorObject('DeleteProducerService - notExistingProducer', {id})
       throw new BadRequestException(`Producer ${id} not found.`);
     }
 

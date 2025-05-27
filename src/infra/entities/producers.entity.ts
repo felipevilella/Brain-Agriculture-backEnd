@@ -45,6 +45,6 @@ export class Producers {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @OneToMany(() => Farms, (farm) => farm.producer, { cascade: true })
+  @OneToMany(() => Farms, (farm) => farm.producer, { cascade: true,  eager: true })
   farms: Farms[];
 }

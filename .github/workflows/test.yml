@@ -24,6 +24,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     env:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
       CI: true
@@ -31,10 +32,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js 18
+      - name: Use Node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
+          cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -48,6 +50,6 @@ jobs:
             echo "Waiting for Postgres..."
             sleep 1
           done
-        
+
       - name: Run tests
         run: yarn test

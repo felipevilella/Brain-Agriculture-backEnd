@@ -20,8 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/infra/database/typeorm/typeorm.config.ts",
-    "typeorm:migrate:generate": "npm run typeorm migration:generate -n",
-    "typeorm:migrate:run": "npm run typeorm migration:run"
+    "typeorm:migrate:generate": "yarn typeorm migration:generate",
+    "typeorm:migrate:run": "yarn typeorm -- migration:run"
   },
   "dependencies": {
     "@faker-js/faker": "^9.8.0",

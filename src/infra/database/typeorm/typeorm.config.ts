@@ -8,7 +8,7 @@ const config = new DataSource({
   migrationsRun: process.env.DATABASE_MIGRATIONS === "true",
   logging: process.env.DATABASE_LOGGING === "true",
   synchronize: false,
-  migrations: ["database/migrations/**/*{.ts,.js}"],
+  migrations: [__dirname + "/migrations/*.{ts,js}"],
   entities: [__dirname + "./../../**/*.entity{.ts,.js}"],
   ssl: { rejectUnauthorized: false },
 });

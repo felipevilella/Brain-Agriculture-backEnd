@@ -5,16 +5,16 @@ import { EnvironmentConfigModule } from "../config/environment-config.module";
 import { EnvironmentConfigService } from "../config/environment-config.service";
 
 export const getTypeOrmModuleOptions = (
-  config: EnvironmentConfigService,
+  config: EnvironmentConfigService
 ): TypeOrmModuleOptions =>
   ({
     type: "postgres",
     url: config.getDatabaseUrl(),
     autoLoadEntities: true,
-    synchronize: true,
+    synchronize: false,
     migrationsRun: true,
     entities: [__dirname + "/entities/**/*.entity{.ts,.js}"],
-    migrations: [__dirname + "/migrations/**/*{.ts,.js}"],
+    migrations: [__dirname + "/migrations/*.{ts,js}"],
   }) as TypeOrmModuleOptions;
 
 @Module({

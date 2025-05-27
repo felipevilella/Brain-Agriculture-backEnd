@@ -28,7 +28,7 @@ export class FarmController {
     private readonly createFarmService: UseCaseProxy<CreateFarmService>
   ) {}
 
-  @ApiOperation({ summary: "Create a new producer" })
+  @ApiOperation({ summary: "Create a new farm" })
   @ApiResponse({ status: 201, description: "Farm created successfully." })
   @ApiBadRequestResponse({
     description:

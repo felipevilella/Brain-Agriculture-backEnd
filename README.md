@@ -4,7 +4,7 @@
 
 ## 📄 Documentação da API
 A API está documentada tanto no Swagger (OpenAPI) quanto no Postman, oferecendo múltiplas opções para consumo e fácil compreensão.
-Você pode acessar a documentação completa via Postman neste link: 🔗 [https://documenter.getpostman.com/view/6256908/2sB2qcBfkV#13d9c677-67a9-4278-8f46-04ebd874a4ac](https://documenter.getpostman.com/view/6256908/2sB2qcBfkV#13d9c677-67a9-4278-8f46-04ebd874a4ac)
+Você pode acessar a documentação completa via Postman neste link: https://documenter.getpostman.com/view/6256908/2sB2qcBfkV#13d9c677-67a9-4278-8f46-04ebd874a4ac
 Além disso, a API está disponível na rota /api
 
 

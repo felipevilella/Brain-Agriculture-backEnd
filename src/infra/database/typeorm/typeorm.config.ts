@@ -9,7 +9,7 @@ const config = new DataSource({
   url: process.env.DATABASE_URL,
   migrationsRun: process.env.DATABASE_MIGRATIONS === "true",
   logging: process.env.DATABASE_LOGGING === "true",
-  synchronize: false,
+  synchronize: isCI ? true : false,
   migrations: [__dirname + "/migrations/*.{ts,js}"],
   entities: [__dirname + "./../../**/*.entity{.ts,.js}"],
   ssl: isCI ? false : { rejectUnauthorized: false },

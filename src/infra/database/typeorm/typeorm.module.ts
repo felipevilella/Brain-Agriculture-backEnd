@@ -4,6 +4,8 @@ import { TypeOrmModule, type TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { EnvironmentConfigModule } from "../config/environment-config.module";
 import { EnvironmentConfigService } from "../config/environment-config.service";
 
+const isCI = process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
+
 export const getTypeOrmModuleOptions = (
   config: EnvironmentConfigService
 ): TypeOrmModuleOptions =>
@@ -11,8 +13,8 @@ export const getTypeOrmModuleOptions = (
     type: "postgres",
     url: config.getDatabaseUrl(),
     autoLoadEntities: true,
-    synchronize: false,
-    migrationsRun: true,
+    synchronize: isCI ? true : false,
+    migrationsRun: isCI ? false : true,
     entities: [__dirname + "/entities/**/*.entity{.ts,.js}"],
     migrations: [__dirname + "/migrations/*.{ts,js}"],
   }) as TypeOrmModuleOptions;

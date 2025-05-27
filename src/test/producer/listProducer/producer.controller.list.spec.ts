@@ -63,4 +63,14 @@ describe("ProducerController - list", () => {
 
     expect(response.body).toEqual(expectedResponse);
   });
+
+  it("should respond with 500 for unexpected errors", async () => {
+    executeMock.mockRejectedValueOnce(new Error("Unexpected error"));
+
+    const response = await request(app.getHttpServer())
+      .get("/producer/list")
+      .send();
+
+    expect(response.status).toBe(500);
+  });
 });

@@ -2,15 +2,17 @@ import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
 dotenv.config();
 
+const isCI = process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
+
 const config = new DataSource({
   type: "postgres",
   url: process.env.DATABASE_URL,
   migrationsRun: process.env.DATABASE_MIGRATIONS === "true",
   logging: process.env.DATABASE_LOGGING === "true",
-  synchronize: false,
+  synchronize: isCI ? true : false,
   migrations: [__dirname + "/migrations/*.{ts,js}"],
   entities: [__dirname + "./../../**/*.entity{.ts,.js}"],
-  ssl: { rejectUnauthorized: false },
+  ssl: isCI ? false : { rejectUnauthorized: false },
 });
 
 config

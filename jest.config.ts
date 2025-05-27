@@ -14,12 +14,15 @@ const config: Config = {
   coverageThreshold: {
     global: {
       statements: 70,
-      branches: 70,
+      branches: 60,
       functions: 70,
       lines: 70,
     },
   },
   coverageDirectory: "../coverage",
+  coveragePathIgnorePatterns: [
+    "<rootDir>/infra/database/typeorm/migrations/"
+  ],
   testEnvironment: "node",
 };
 

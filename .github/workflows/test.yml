@@ -56,7 +56,7 @@ jobs:
           psql -h localhost -U postgres -d postgres -c "CREATE DATABASE test_brain_db;"
 
       - name: Run migrations
-        run: yarn migration:run
+        run: yarn typeorm:migrate:run
 
       - name: Run tests
         run: yarn test

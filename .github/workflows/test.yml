@@ -47,5 +47,9 @@ jobs:
             echo "Waiting for Postgres..."
             sleep 1
           done
+
+      - name: Run migrations
+        run: yarn typeorm migration:run
+        
       - name: Run tests
         run: yarn test

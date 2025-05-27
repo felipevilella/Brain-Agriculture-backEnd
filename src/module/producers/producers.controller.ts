@@ -6,6 +6,7 @@ import {
   HttpCode,
   Inject,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
   UsePipes,
@@ -84,7 +85,7 @@ export class ProducerController {
   })
   @ApiParam({ name: "id", required: true, description: "Producer ID" })
   @ApiBody({ type: UpdateProducerDto })
-  async update(@Param("id") id: string, @Body() producer: UpdateProducerDto) {
+  async update(@Param('id', new ParseUUIDPipe()) id: string, @Body() producer: UpdateProducerDto) {
     logInfoInput(producer);
     return await this.createProducerService.getInstance().execute(producer, id);
   }
@@ -103,7 +104,7 @@ export class ProducerController {
     description: "Internal server error.",
   })
   @ApiParam({ name: "id", required: true, description: "Producer ID" })
-  async delete(@Param("id") id: string) {
+  async delete(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.deleteProducerService.getInstance().execute(id);
   }
 

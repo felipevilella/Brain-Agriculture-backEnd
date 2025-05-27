@@ -7,6 +7,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsUUID,
   MinLength,
   ValidateNested,
 } from "class-validator";
@@ -61,6 +62,7 @@ export class CreateFarmDto {
   })
   @IsNotEmpty()
   @IsString()
+  @IsUUID()
   producerId: string;
 
   @ApiProperty({

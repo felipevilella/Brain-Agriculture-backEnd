@@ -61,3 +61,9 @@ yarn start:prod
 # Executa todos os testes
 yarn test:ci
 ```
+
+▶️ Migrations
+```
+# Gerar migrations
+yarn typeorm:migrate:generate src/infra/database/typeorm/migrations/{name_migrations}
+```

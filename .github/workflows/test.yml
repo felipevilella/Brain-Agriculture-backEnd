@@ -55,8 +55,5 @@ jobs:
           psql -h localhost -U postgres -d postgres -c "DROP DATABASE IF EXISTS test_brain_db;"
           psql -h localhost -U postgres -d postgres -c "CREATE DATABASE test_brain_db;"
 
-      - name: Run migrations
-        run: yarn typeorm:migrate:run
-
       - name: Run tests
         run: yarn test

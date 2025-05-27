@@ -52,8 +52,17 @@ jobs:
 
       - name: Reset database
         run: |
+          psql -h localhost -U postgres -d postgres -c "
+            SELECT pg_terminate_backend(pg_stat_activity.pid)
+            FROM pg_stat_activity
+            WHERE pg_stat_activity.datname = 'test_brain_db'
+              AND pid <> pg_backend_pid();
+          "
           psql -h localhost -U postgres -d postgres -c "DROP DATABASE IF EXISTS test_brain_db;"
           psql -h localhost -U postgres -d postgres -c "CREATE DATABASE test_brain_db;"
+
+      - name: Run migrations
+        run: yarn typeorm migration:run
 
       - name: Run tests
         run: yarn test

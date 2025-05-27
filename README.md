@@ -23,6 +23,7 @@ Acesse a documentação completa via Postman:
 - **Injeção de dependência** — Utilizando o container do NestJS  
 - **Clean Architecture** — Separação clara entre regras de negócio, infraestrutura e interfaces  
 - **Testabilidade** — Cobertura  de 70% dos testes com mocks de dependências  
+   <img width="848" alt="image" src="https://github.com/user-attachments/assets/0e1234d9-6ed9-428f-9dc8-8ab967a3b851" />
 
 ---
 

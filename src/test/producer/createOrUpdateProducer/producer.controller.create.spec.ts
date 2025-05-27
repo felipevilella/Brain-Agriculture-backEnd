@@ -74,45 +74,4 @@ describe("FarmController - create", () => {
     expect(response.status).toBe(201);
     expect(response.body).toEqual(fakeResponse);
   });
-
-  // it("should respond with 400 Bad Request for producer creation with invalid CNPJ", async () => {
-  //   createProducer.document = "12345678901234";
-
-  //   const response = await request(app.getHttpServer())
-  //     .post("/producer")
-  //     .send(createProducer);
-
-  //   expect(response.status).toBe(400);
-  //   expect(response.body.message[0]).toEqual("This CNPJ is Invalid number");
-  // });
-
-  // it("should respond with 400 Bad Request for producer creation with invalid CPF", async () => {
-  //   createProducer.typeDocument = TYPE_DOCUMENT.CPF;
-  //   createProducer.document = "12345678900";
-
-  //   const response = await request(app.getHttpServer())
-  //     .post("/producer")
-  //     .send(createProducer);
-
-  //   expect(response.status).toBe(400);
-  //   expect(response.body.message[0]).toEqual("This CPF is Invalid number");
-  // });
-
-  // it("should respond with 400 Bad Request", async () => {
-  //   const response = await request(app.getHttpServer())
-  //     .post("/producer")
-  //     .send({});
-
-  //   expect(response.status).toBe(400);
-  // });
-
-  // it("should respond with 500 for unexpected errors", async () => {
-  //   executeMock.mockRejectedValueOnce(new Error("Unexpected error"));
-
-  //   const response = await request(app.getHttpServer())
-  //     .post("/producer")
-  //     .send(createProducer);
-
-  //   expect(response.status).toBe(500);
-  // });
 });

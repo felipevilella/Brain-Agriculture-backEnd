@@ -20,6 +20,9 @@ const config: Config = {
     },
   },
   coverageDirectory: "../coverage",
+  coveragePathIgnorePatterns: [
+    "<rootDir>/infra/database/typeorm/migrations/"
+  ],
   testEnvironment: "node",
 };
 

@@ -25,7 +25,7 @@ export class Producers {
     enum: STATES_TYPE,
     nullable: false,
   })
-  states: STATES_TYPE;
+  state: STATES_TYPE;
 
   @Column({ nullable: false, unique: true })
   document: string;

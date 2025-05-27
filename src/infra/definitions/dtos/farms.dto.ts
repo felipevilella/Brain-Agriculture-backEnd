@@ -56,7 +56,7 @@ export class CreateFarmDto {
   @IsEnum(STATES_TYPE, {
     message: `State must be one of the following: ${Object.values(STATES_TYPE).join(", ")}`,
   })
-  states: STATES_TYPE;
+  state: STATES_TYPE;
 
   @IsNotEmpty()
   @IsNumber()
@@ -94,7 +94,7 @@ export interface IFarmDto {
   producerId: string;
   name: string;
   city: string;
-  states: STATES_TYPE;
+  state: STATES_TYPE;
   totalArea: number;
   arableArea: number;
   vegetationArea: number;
@@ -118,7 +118,7 @@ export interface IFarmMapper {
   producerId: string;
   name: string;
   city: string;
-  states: STATES_TYPE;
+  state: STATES_TYPE;
   totalArea: number;
   arableArea: number;
   vegetationArea: number;

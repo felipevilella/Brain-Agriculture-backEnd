@@ -60,7 +60,7 @@ export class CreateProducerDto {
   @IsEnum(STATES_TYPE, {
     message: `State must be one of the following: ${Object.values(STATES_TYPE).join(", ")}`,
   })
-  states: STATES_TYPE;
+  state: STATES_TYPE;
 
   @IsNotEmpty()
   @IsString()
@@ -94,7 +94,7 @@ export class UpdateProducerDto {
     message: `State must be one of the following: ${Object.values(STATES_TYPE).join(", ")}`,
   })
   @IsOptional()
-  states: STATES_TYPE;
+  state: STATES_TYPE;
 
   @IsNotEmpty()
   @IsString()
@@ -115,7 +115,7 @@ export class IProducerDto {
   id: string;
   name: string;
   city: string;
-  states: STATES_TYPE;
+  state: STATES_TYPE;
   document: string;
   typeDocument: TYPE_DOCUMENT;
   farms?: IFarmDto[];
@@ -127,7 +127,7 @@ export class IProducerMapper {
   id: string;
   name: string;
   city: string;
-  states: STATES_TYPE;
+  state: STATES_TYPE;
   document: string;
   typeDocument: TYPE_DOCUMENT;
   farms?: IFarmMapper[];

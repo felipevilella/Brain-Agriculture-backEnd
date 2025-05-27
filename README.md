@@ -6,6 +6,10 @@
 Acesse a documentação completa via Postman:
 🔗 [https://documenter.getpostman.com/view/6256908/2sB2qcBfkV#13d9c677-67a9-4278-8f46-04ebd874a4ac](https://documenter.getpostman.com/view/6256908/2sB2qcBfkV#13d9c677-67a9-4278-8f46-04ebd874a4ac)
 
+
+# endpoint da API (Produção)
+🔗 https://brain-agriculture-backend-production.up.railway.app/
+
 ## 🚀 Tecnologias Utilizadas
 
 - [NestJS](https://nestjs.com/) — Framework Node.js para aplicações escaláveis  

@@ -27,6 +27,11 @@ jobs:
 
     env:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_brain_db
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: test_brain_db
+      PGPORT: 5432
 
     steps:
       - uses: actions/checkout@v3
@@ -48,6 +53,14 @@ jobs:
             echo "Waiting for Postgres..."
             sleep 1
           done
+
+      - name: Reset database
+        run: |
+          psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS test_brain_db;"
+          psql -h localhost -U postgres -c "CREATE DATABASE test_brain_db;"
+
+      - name: Run migrations
+        run: yarn typeorm migration:run
 
       - name: Run tests
         run: yarn test

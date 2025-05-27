@@ -16,7 +16,7 @@ Acesse a documentação completa via Postman:
 - [TypeScript](https://www.typescriptlang.org/) — Superset do JavaScript com tipagem estática  
 - [Jest](https://jestjs.io/) — Framework de testes  
 - [ESLint](https://eslint.org/) — Linting para manter o padrão de código
-- [PostgreSQL](https://www.postgresql.org/) — Banco de dados relacional robusto e confiável  
+- [PostgreSQL](https://www.postgresql.org/) — Banco de dados relacional
 - [TypeORM](https://typeorm.io/) — ORM para TypeScript e JavaScript  
 - [Docker](https://www.docker.com/) — Containerização da aplicação  
 ---

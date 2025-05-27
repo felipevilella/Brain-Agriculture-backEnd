@@ -27,7 +27,7 @@ export class Farms {
   city: string;
 
   @Column()
-  states: string;
+  state: string;
 
   @Column("float")
   totalArea: number;

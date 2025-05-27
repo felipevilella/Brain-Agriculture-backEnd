@@ -24,9 +24,9 @@ export class FarmsRepository implements IFarmsRepository {
   async getTotalFarmByStates(): Promise<ITotalFarmByStateDto[]> {
     const farm = await this.farmsRepository
       .createQueryBuilder("farms")
-      .select("farms.states", "state")
+      .select("farms.state", "state")
       .addSelect("COUNT(*)", "count")
-      .groupBy("farms.states")
+      .groupBy("farms.state")
       .getRawMany();
 
     return farm;

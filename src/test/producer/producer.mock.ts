@@ -27,7 +27,7 @@ export function createFakeProducer(): CreateProducerDto {
   return {
     name: producerData.name,
     city: faker.location.city(),
-    states: faker.helpers.arrayElement([
+    state: faker.helpers.arrayElement([
       STATES_TYPE.MG,
       STATES_TYPE.SP,
       STATES_TYPE.BA,
@@ -43,7 +43,7 @@ export function createFakeProducerResponse(): IProducerMapper {
     id: faker.string.uuid(),
     name: producerData.name,
     city: faker.location.city(),
-    states: faker.helpers.arrayElement([
+    state: faker.helpers.arrayElement([
       STATES_TYPE.MG,
       STATES_TYPE.SP,
       STATES_TYPE.BA,
@@ -61,7 +61,7 @@ export function createFakeProducerFarm(): IProducerMapper {
     id: producerId,
     name: faker.person.fullName(),
     city: faker.location.city(),
-    states: faker.helpers.arrayElement([
+    state: faker.helpers.arrayElement([
       STATES_TYPE.MG,
       STATES_TYPE.SP,
       STATES_TYPE.BA,
@@ -74,7 +74,7 @@ export function createFakeProducerFarm(): IProducerMapper {
         id: faker.string.uuid(),
         name: faker.company.name() + " Farm",
         city: faker.location.city(),
-        states: faker.helpers.arrayElement([
+        state: faker.helpers.arrayElement([
           STATES_TYPE.MG,
           STATES_TYPE.SP,
           STATES_TYPE.BA,

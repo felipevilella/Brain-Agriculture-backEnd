@@ -8,7 +8,7 @@ class FarmMapper {
       id: farm.id,
       name: farm.name,
       city: farm.city,
-      states: farm.states,
+      state: farm.state,
       totalArea: farm.totalArea,
       arableArea: farm.arableArea,
       vegetationArea: farm.vegetationArea,

@@ -17,7 +17,7 @@ Localhost: http://localhost:3333/api
 
 
 # endpoint da API (Produção)
-🔗 https://brain-agriculture-backend-production.up.railway.app/
+🔗 https://brain-agriculture-backend-production.up.railway.app
 
 ## 🚀 Tecnologias Utilizadas
 

@@ -8,5 +8,7 @@ export interface IFarmsRepository {
   getTotalAreaFarms:()=>Promise<number>
   getTotalFarmByStates:() => Promise<ITotalFarmByStateDto[]>
   getTotalArableVegetation(): Promise<ITotalArableVegetationDto>
+  deleteFarm:(farmId: string) => Promise<void>
+
 }
 

@@ -27,6 +27,7 @@ export class FarmsRepository implements IFarmsRepository {
       .createQueryBuilder("farms")
       .select("farms.state", "state")
       .addSelect("COUNT(*)", "count")
+      .where("farms.deletedAt IS NULL")
       .groupBy("farms.state")
       .getRawMany();
 
@@ -34,26 +35,26 @@ export class FarmsRepository implements IFarmsRepository {
   }
 
   async getTotalFarms(): Promise<number> {
-    const farm = await await this.farmsRepository
+    const farm = await this.farmsRepository
       .createQueryBuilder("farms")
       .select("COUNT(*)", "count")
+      .where("farms.deletedAt IS NULL")
       .getRawOne();
 
-    return farm.count;
+    return Number(farm.count);
   }
-
   async getFarmById(id: string): Promise<IFarmDto> {
     return (await this.farmsRepository.findOne({
       where: { id },
       relations: ["harvests", "harvests.crops"],
     })) as IFarmDto;
   }
-
   async getTotalArableVegetation(): Promise<ITotalArableVegetationDto> {
     const result = await this.farmsRepository
       .createQueryBuilder("farms")
       .select("SUM(farms.arableArea)", "arable")
       .addSelect("SUM(farms.vegetationArea)", "vegetation")
+      .where("farms.deletedAt IS NULL")
       .getRawOne();
 
     return {
@@ -63,12 +64,13 @@ export class FarmsRepository implements IFarmsRepository {
   }
 
   async getTotalAreaFarms(): Promise<number> {
-    const farm = await this.farmsRepository
+    const result = await this.farmsRepository
       .createQueryBuilder("farms")
       .select("SUM(farms.totalArea)", "sum")
+      .where("farms.deletedAt IS NULL")
       .getRawOne();
 
-    return farm.sum;
+    return Number(result.sum);
   }
 
   async createFarm(farmDto: CreateFarmDto): Promise<IFarmDto> {
@@ -125,5 +127,12 @@ export class FarmsRepository implements IFarmsRepository {
 
       await this.farmsRepository.save(existingFarm);
     }
+  }
+
+  async deleteFarm(farmId: string): Promise<void> {
+    await this.farmsRepository.update(
+      { id: farmId },
+      { deletedAt: new Date() }
+    );
   }
 }

@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -42,7 +43,6 @@ export class Farms {
   @JoinColumn({ name: "producerId" })
   producer: Producers;
 
-  
   @OneToMany(() => Harvests, (harvest) => harvest.farm, {
     eager: true,
     cascade: true,
@@ -54,4 +54,7 @@ export class Farms {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

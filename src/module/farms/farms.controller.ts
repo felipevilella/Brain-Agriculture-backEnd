@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Delete,
+  HttpCode,
   Inject,
   Param,
   ParseUUIDPipe,
@@ -26,13 +28,16 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { CreateOrUpdateFarmService } from "./services/createOrUpdateFarm.services";
+import { DeleteFarmService } from "./services/deleteFarm.service";
 
 @ApiTags("Farm")
 @Controller("farm")
 export class FarmController {
   constructor(
     @Inject(FarmUseCaseProxyModule.CREATE_OR_UPDATE_FARM_SERVICE)
-    private readonly createOrUpdateFarmService: UseCaseProxy<CreateOrUpdateFarmService>
+    private readonly createOrUpdateFarmService: UseCaseProxy<CreateOrUpdateFarmService>,
+    @Inject(FarmUseCaseProxyModule.DELETE_FARM_SERVICE)
+    private readonly deleteFarmService: UseCaseProxy<DeleteFarmService>
   ) {}
 
   @Post()
@@ -79,5 +84,23 @@ export class FarmController {
   ) {
     logInfoInput(farm);
     return await this.createOrUpdateFarmService.getInstance().execute(farm, id);
+  }
+
+  @Delete(":id")
+  @HttpCode(204)
+  @UsePipes(new ValidationPipe({ transform: true }))
+  @ApiOperation({ summary: "Delete a farm" })
+  @ApiResponse({ status: 204, description: "farm deleted successfully." })
+  @ApiBadRequestResponse({
+    description: "Bad Request - Possible reasons:\n" + "- farm ${id} not found",
+  })
+  @ApiResponse({
+    status: 500,
+    description: "Internal server error.",
+  })
+  @ApiParam({ name: "id", required: true, description: "farm ID" })
+  async delete(@Param("id", new ParseUUIDPipe()) id: string) {
+    logInfoInput({id});
+    return await this.deleteFarmService.getInstance().execute(id);
   }
 }

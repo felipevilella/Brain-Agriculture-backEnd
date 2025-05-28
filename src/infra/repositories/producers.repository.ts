@@ -6,7 +6,11 @@ import { Repository } from "typeorm";
 
 import { TYPE_DOCUMENT } from "../definitions/producers.type";
 import { Producers } from "../entities/producers.entity";
-import { CreateProducerDto, IProducerDto, UpdateProducerDto } from "../definitions/dtos/producers.dto";
+import {
+  CreateProducerDto,
+  IProducerDto,
+  UpdateProducerDto,
+} from "../definitions/dtos/producers.dto";
 
 @Injectable()
 export class ProducersRepository implements IProducersRepository {
@@ -28,9 +32,9 @@ export class ProducersRepository implements IProducersRepository {
   }
 
   async getProducerById(id: string): Promise<IProducerDto> {
-    return await this.producersRepository.findOneBy({
+    return (await this.producersRepository.findOneBy({
       id,
-    }) as unknown as IProducerDto;
+    })) as unknown as IProducerDto;
   }
 
   async updateProducer(
@@ -53,7 +57,12 @@ export class ProducersRepository implements IProducersRepository {
       relations: ["farms", "farms.harvests", "farms.harvests.crops"],
     });
 
-    return producers as unknown as IProducerDto[];
+    const filteredProducers = producers.map((producer) => ({
+      ...producer,
+      farms: producer.farms?.filter((farm) => !farm.deletedAt) || [],
+    }));
+
+    return filteredProducers as IProducerDto[];
   }
 
   async createProducer(producer: CreateProducerDto): Promise<IProducerDto> {

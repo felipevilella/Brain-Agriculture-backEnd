@@ -1,6 +1,7 @@
 import { BadRequestException } from "@nestjs/common";
 import { logErrorObject, logInfoObject } from "src/infra/helpers/logInfo";
-import { FarmsRepository } from "src/infra/repositories/Farms.repository";
+import { FarmsRepository } from "src/infra/repositories/farms.repository";
+
 
 export class DeleteFarmService {
   constructor(private readonly farmsRepository: FarmsRepository) {}

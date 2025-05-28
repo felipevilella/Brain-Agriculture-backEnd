@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 
 import { IFarmsRepository } from "src/repositories/farms.repository.interface";
@@ -12,6 +12,7 @@ import {
   IFarmDto,
   ITotalArableVegetationDto,
   ITotalFarmByStateDto,
+  UpdateFarmDTO,
 } from "../definitions/dtos/farms.dto";
 
 @Injectable()
@@ -39,6 +40,13 @@ export class FarmsRepository implements IFarmsRepository {
       .getRawOne();
 
     return farm.count;
+  }
+
+  async getFarmById(id: string): Promise<IFarmDto> {
+    return (await this.farmsRepository.findOne({
+      where: { id },
+      relations: ["harvests", "harvests.crops"],
+    })) as IFarmDto;
   }
 
   async getTotalArableVegetation(): Promise<ITotalArableVegetationDto> {
@@ -87,5 +95,35 @@ export class FarmsRepository implements IFarmsRepository {
     const newFarm = await this.farmsRepository.save(farm);
 
     return newFarm as IFarmDto;
+  }
+
+  async updateFarm(id: string, farmDto: UpdateFarmDTO): Promise<void> {
+    const existingFarm = await this.farmsRepository.findOne({
+      where: { id },
+      relations: ["harvests", "harvests.crops"],
+    });
+
+    if (existingFarm) {
+      this.farmsRepository.merge(existingFarm, farmDto);
+      existingFarm.harvests =
+        farmDto.harvests?.map((harvestDto) => {
+          const harvest = new Harvests();
+          harvest.name = harvestDto.name;
+          harvest.year = harvestDto.year;
+          harvest.farm = existingFarm;
+
+          harvest.crops =
+            harvestDto.crops?.map((cropDto) => {
+              const crop = new Crops();
+              crop.name = cropDto.name;
+              crop.harvests = harvest;
+              return crop;
+            }) ?? [];
+
+          return harvest;
+        }) ?? [];
+
+      await this.farmsRepository.save(existingFarm);
+    }
   }
 }

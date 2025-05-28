@@ -23,6 +23,9 @@ export class Harvests {
   @Column()
   year: number;
 
+  @Column()
+  farmId: string;
+
   @ManyToOne(() => Farms, (farm) => farm.harvests, { onDelete: "CASCADE" })
   @JoinColumn({ name: "farmId" })
   farm: Farms;

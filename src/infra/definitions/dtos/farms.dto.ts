@@ -131,6 +131,80 @@ export class CreateFarmDto {
   harvests?: CreateHarvestDto[];
 }
 
+export class UpdateFarmDTO {
+  @ApiProperty({
+    description: 'Farm name',
+    example: 'Green Valley Farm',
+  })
+  @IsNotEmpty()
+  @IsString()
+  @IsOptional()
+  name: string;
+
+  @ApiProperty({
+    description: 'City where the farm is located',
+    example: 'Springfield',
+    minLength: 3,
+  })
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(3, {
+    message: 'city must be at least 3 characters long',
+  })
+  @IsOptional()
+  city: string;
+
+  @ApiProperty({
+    description: `State where the farm is located. Must be one of: ${Object.values(STATES_TYPE).join(', ')}`,
+    enum: STATES_TYPE,
+    example: STATES_TYPE.MG,
+  })
+  @IsNotEmpty()
+  @IsEnum(STATES_TYPE, {
+    message: `State must be one of the following: ${Object.values(STATES_TYPE).join(', ')}`,
+  })
+  @IsOptional()
+  state: STATES_TYPE;
+
+  @ApiProperty({
+    description: 'Total area of the farm (in hectares)',
+    example: 1500,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  @IsOptional()
+  totalArea: number;
+
+  @ApiProperty({
+    description: 'Arable area of the farm (in hectares)',
+    example: 1000,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  @IsOptional()
+  arableArea: number;
+
+  @ApiProperty({
+    description: 'Vegetation area of the farm (in hectares)',
+    example: 500,
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  @IsOptional()
+  vegetationArea: number;
+
+  @ApiPropertyOptional({
+    description: 'List of harvests associated with the farm',
+    type: [CreateHarvestDto],
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateHarvestDto)
+  @IsOptional()
+  harvests?: CreateHarvestDto[];
+}
+
 
 export interface ICropDto {
   id: string;
